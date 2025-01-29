@@ -17,4 +17,23 @@ export const addMovie = async (movie) => {
     return result;
 };
 
-export const getMovieById
+export const getMovieById = async (id) => {
+    const movie = await Movie.findById(id);
+    if (!movie)
+        throw createHttpError(404, 'Movie is not found');
+    return movie;
+};
+
+export const editMovieById = async (id, updateData) => {
+    const result = await Movie.findOneAndUpdate({id: id}, updateData, {new: true});
+    if (!result)
+        throw createHttpError(404, 'Movie is not found');
+    return result;
+};
+
+export const deleteMovieById = async (id) => {
+    const result = await Movie.findOneAndDelete(id);
+    if (!result)
+        throw createHttpError(404, 'Movie is not found');
+    return result;
+};

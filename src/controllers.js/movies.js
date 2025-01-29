@@ -1,4 +1,4 @@
-import { addMovie, getAllMovies } from "../services/movies.js";
+import { addMovie, deleteMovieById, editMovieById, getAllMovies, getMovieById } from "../services/movies.js";
 
 
 export async function getAllMoviesController(req, res) {
@@ -9,6 +9,16 @@ export async function getAllMoviesController(req, res) {
       data: movies
     });
 };
+
+export async function getMovieByIdController(req, res) {
+    const { id } = req.params;
+    const movie = await getMovieById(id);
+
+    res.status(200).json({
+        message: `Successfully found a movie by id ${id}`,
+        data: movie
+    });
+}
 
 export async function addMovieController(req, res) {
     const movie = {
@@ -30,4 +40,25 @@ export async function addMovieController(req, res) {
     message: 'Movie is successfully added!',
     data: result,
   });
+}
+
+export async function editMovieByIdController(req, res, next) {
+    const { id } = req.params.id;
+    const updateData = req.body;
+    const result = await editMovieById(id, updateData);
+    res.status(201).json({
+        status: 201,
+        message: 'Movie detail is edited successfully!',
+        data: result
+    });
+}
+
+export async function deleteMovieByIdController(req, res) {
+    const { id } = req.params.id;
+    const result = await deleteMovieById(id);
+    res.status(200).json({
+        status: 200,
+        message: 'Movie is deleted successfully!',
+        data: result
+    });
 }
