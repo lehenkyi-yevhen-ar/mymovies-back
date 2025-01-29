@@ -2,7 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { env } from './utils/env.js';
-import { Student } from './db/models/student.js';
+import  Routers  from './routers/index.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -18,40 +20,12 @@ export const setupServer = () => {
     })
   );
 
-  app.get('/contacts', async (req, res) => {
-    const students = await Student.find();
 
-    res.send({
-      status: 200,
-      message: 'Successfully found contacts',
-      data: students
-    });
-  });
+  app.use(Routers);
 
-  app.get('/contacts/:id', async (req, res) => {
-    const { id } = req.params;
-    const student = await Student.findById(id);
+  app.use('*', notFoundHandler);
 
-    if (student === null) {
-      return res
-        .status(404)
-        .send({ status: 404, message: 'Contact not found' });
-    }
-    res.send({
-      status: 200,
-      message: `Successfully found contact with id ${id}`,
-      data: student
-    });
-  });
-
-  app.use((req, res, next) =>
-    res.status(404).send({ status: 404, message: 'Not Found' })
-  );
-
-  app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send({ status: 500, message: 'Internal server error' });
-  });
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`CORS-enabled server is running on port ${PORT}`);
