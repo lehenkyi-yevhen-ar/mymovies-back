@@ -3,7 +3,7 @@ import Joi from "joi";
 
 export const addMovieSchema = Joi.object({
     title: Joi.string().required(),
-    id: Joi.string().required(),
+    movie_id: Joi.string().required(),
     original_title: Joi.string().required(),
     poster_path: Joi.string(),
     production_countries: Joi.array()
@@ -30,7 +30,8 @@ export const addMovieSchema = Joi.object({
 });
 
 export const editMovieSchema = Joi.object({
-        title: Joi.string(),
+    title: Joi.string(),
+movie_id: Joi.string(),
     original_title: Joi.string(),
     production_countries: Joi.array()
         .items(
@@ -41,6 +42,7 @@ export const editMovieSchema = Joi.object({
         ),
     release_date: Joi.date(),
     runtime: Joi.number(),
+    poster_path: Joi.string(),
     overview: Joi.string(),
     genres: Joi.array().items(Joi.string()),
     cast: Joi.array()

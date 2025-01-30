@@ -11,7 +11,7 @@ const castSchema = new mongoose.Schema(
 
 const movieSchema = new mongoose.Schema(
   {
-    id: {
+    movie_id: {
       type: String,
       required: true,
       unique: true
