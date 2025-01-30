@@ -11,9 +11,17 @@ const castSchema = new mongoose.Schema(
 
 const movieSchema = new mongoose.Schema(
   {
+    id: {
+      type: String,
+      required: true,
+      unique: true
+    },
     title: {
       type: String,
       required: true
+    },
+    poster_path: {
+      type: String
     },
     original_title: {
       type: String,
