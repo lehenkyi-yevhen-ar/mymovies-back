@@ -23,6 +23,8 @@ export async function getMovieByIdController(req, res) {
 export async function addMovieController(req, res) {
     const movie = {
         title: req.body.title,
+        id: req.body.id,
+        poster_path: req.body.poster_path,
         original_title: req.body.original_title,
         production_countries: req.body.production_countries,
         release_date: req.body.release_date,
@@ -33,6 +35,8 @@ export async function addMovieController(req, res) {
         isFavorite: false,
         planToWatch: false
     };
+
+
 
     const result = await addMovie(movie);
      res.status(201).json({

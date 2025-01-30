@@ -11,8 +11,8 @@ const castSchema = new mongoose.Schema(
 
 const movieSchema = new mongoose.Schema(
   {
-    movie_id: {
-      type: String,
+    id: {
+      type: Number,
     },
     title: {
       type: String,
