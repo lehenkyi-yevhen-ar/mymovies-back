@@ -10,6 +10,12 @@ export const getAllMovies = async () => {
 };
 
 export const addMovie = async (movie) => {
+     const existingMovie = await Movie.findOne({ title: movie.title });
+
+  if (existingMovie) {
+    throw createHttpError(400, 'Movie with this title already exists');
+  }
+
     const result = await Movie.create(movie);
     if (!result)
         throw createHttpError(500, 'Failed, try again later');

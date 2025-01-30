@@ -43,7 +43,7 @@ export async function addMovieController(req, res) {
 }
 
 export async function editMovieByIdController(req, res, next) {
-    const { id } = req.params.id;
+    const { id } = req.params;
     const updateData = req.body;
     const result = await editMovieById(id, updateData);
     res.status(201).json({
