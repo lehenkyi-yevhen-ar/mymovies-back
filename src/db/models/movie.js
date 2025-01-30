@@ -12,7 +12,7 @@ const castSchema = new mongoose.Schema(
 const movieSchema = new mongoose.Schema(
   {
     id: {
-      type: Number,
+      type: String,
       required: true,
       unique: true
     },

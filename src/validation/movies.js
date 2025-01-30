@@ -3,7 +3,7 @@ import Joi from "joi";
 
 export const addMovieSchema = Joi.object({
     title: Joi.string().required(),
-    id: Joi.number().required(),
+    id: Joi.string().required(),
     original_title: Joi.string().required(),
     poster_path: Joi.string(),
     production_countries: Joi.array()
