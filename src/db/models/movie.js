@@ -13,8 +13,6 @@ const movieSchema = new mongoose.Schema(
   {
     movie_id: {
       type: String,
-      required: true,
-      unique: true
     },
     title: {
       type: String,
